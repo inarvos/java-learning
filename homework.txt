@@ -1,1 +1,4 @@
+0.install git
+0.1 clone git project to the eclipse workspace
+
 1.to split number on digits instead of substring use toCharArray method of String
