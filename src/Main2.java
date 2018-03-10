@@ -24,7 +24,7 @@ public class Main2 {
 		*/
 		
 		//TODO: encode passwords for Example with help java.util.Base64 class
-		
+		//TODO: test
 		
 		List<Account> repository = Arrays.asList(
 					new Account("Vova", "000000", 19, "Chernivtsy", "ing"),
