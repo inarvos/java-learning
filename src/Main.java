@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		
+		//TODO: initialize repos for saving accounts
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Do you want to start the registration or login to the already registered account?(1/2): ");
 		int answer = sc.nextInt();
@@ -69,6 +69,8 @@ public class Main {
 		}
 		sc.close();
 
+		
+		//TODO: save accounts to the disk...
 		
 	}
 
