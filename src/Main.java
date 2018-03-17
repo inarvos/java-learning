@@ -1,50 +1,66 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
+	private static final String REPOSITORY_PATH = "accounts.db";
+
 	public static void main(String[] args) {
 		
-		List<Account> repository = loadRepository("accounts.db");
+		Repository repository = Repository.from(REPOSITORY_PATH);
+		
+		System.out.println(repository.getRepository());
 		
 		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Do you want to start the registration or login to the already registered account?(1/2): ");
 		int answer = sc.nextInt();
+		
 		if (answer == 1){
-			System.out.println("Enter your full name: ");
-			String name = sc.next();
+			
+			System.out.println("Create a nickname: ");
+			String newnickname = sc.next();
+			
+			//TODO: if exists than try again...
+			if (repository.exists(newnickname.trim())) {
+				throw new AccountException("Nick name already exists!");
+			}
+			
+			
 			System.out.println("Enter your age: ");
 			int age = sc.nextInt();
-				if (age < 18){
-					System.out.println("Sorry, but only adults can registrate here.");
-				} else if (age > 110) {
-					System.out.println("Please enter your real age." + age + " is impossibly big.");
-				}
-				else {
-					System.out.println("Enter your hometown: ");
-					String hometown = sc.next();
-					System.out.println("Create a nickname: ");
-					String newnickname = sc.next();
-					System.out.println("Create a password: ");
-					String password = sc.next();
-					System.out.println("Please check your data. If everything is correct, enter Yes. But if you want to change something, restart the registration.");
-					System.out.println("Your name: " + name + " Age: " + age + " Hometown: " + hometown + " Your nickname:" + newnickname + " Your password:" + password);
-					String checking = sc.next();
-					if (checking.equalsIgnoreCase("Yes")){
-						System.out.println("You have registered successfully.");
-						System.out.println(". - - -  .  |.        |       ..       |");
-						System.out.println("|           |  .      |     .    .     |");
-						System.out.println("|- -     |  |    .    |    .------.    |");
-						System.out.println("|        |  |      .  |   .        .   |");
-						System.out.println("|        |  |        .|  .          .  |-------");
-					}
-				}
+			System.out.println("Enter your hometown: ");
+			String hometown = sc.next();
+					
+			System.out.println("Enter your full name: ");
+			String name = sc.next();
+					
+			System.out.println("Create a password: ");
+			String password = sc.next();
+			System.out.println("Please check your data. If everything is correct, enter Yes. But if you want to change something, restart the registration.");
+			System.out.println("Your name: " + name + " Age: " + age + " Hometown: " + hometown + " Your nickname:" + newnickname + " Your password:" + password);
+			
+			Account account = new Account(name, password, age, hometown, newnickname);
+			
+			
+			repository.add(account);
+			
+			//TODO: handle below scenario...
+			/*
+			String checking = sc.next();
+			if (checking.equalsIgnoreCase("Yes")){
+					System.out.println("You have registered successfully.");
+					System.out.println(". - - -  .  |.        |       ..       |");
+					System.out.println("|           |  .      |     .    .     |");
+					System.out.println("|- -     |  |    .    |    .------.    |");
+					System.out.println("|        |  |      .  |   .        .   |");
+					System.out.println("|        |  |        .|  .          .  |-------");
+			}
+			*/
+			
 		} else if (answer == 2){
+			
+			//TODO: write code below using repository...
+			
 			System.out.println("Enter your nickname: ");
 			String nickname = sc.next();
 			if (nickname.equals("Vova")){
@@ -78,25 +94,9 @@ public class Main {
 		sc.close();
 
 		
-		//TODO: save accounts to the disk...
+		Repository.saveRepository(REPOSITORY_PATH, repository);
+		
 		
 	}
-
-	private static List<Account> loadRepository(String fileName) {
-		
-		List<Account> repository = new ArrayList<>();
-		
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-			repository = (List<Account>) ois.readObject();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return repository;
-	}
-
-
+	
 }

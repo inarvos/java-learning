@@ -65,6 +65,12 @@ public class Account implements Serializable {
 		if (age < 18) {
 			throw new AccountException("too young guy!!!");
 		}
+		
+		if (age > 110) {
+			throw new AccountException("entered age." + age + " is impossibly big.");
+		}
+		
+		
 		this.age = age;
 	}
 
