@@ -12,7 +12,7 @@ public class Main2 {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		
-		/*
+		
 		Account account = new Account("Vova", "000000", 19, "Chernivtsy", "ing");
 		
 		Account account2 = new Account("Dima", "111111", 46, "Toprivtsy", "dimkas71");
@@ -21,16 +21,11 @@ public class Main2 {
 		
 		repository.add(account);
 		repository.add(account2);
-		*/
+		
 		
 		//TODO: encode passwords for Example with help java.util.Base64 class
 		//TODO: test
-		
-		List<Account> repository = Arrays.asList(
-					new Account("Vova", "000000", 19, "Chernivtsy", "ing"),
-					new Account("Dima", "111111", 46, "Toprivtsy", "dimkas71")
-				);
-		
+			
 		
 		
 		File file = new File("accounts.db");
@@ -44,7 +39,7 @@ public class Main2 {
 		
 		/*BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		
-		writer.write("Привет");
+		writer.write("пїЅпїЅпїЅпїЅпїЅпїЅ");
 		
 		writer.close();
 		
