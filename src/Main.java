@@ -1,9 +1,17 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		//TODO: initialize repos for saving accounts
+		
+		List<Account> repository = loadRepository("accounts.db");
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Do you want to start the registration or login to the already registered account?(1/2): ");
 		int answer = sc.nextInt();
@@ -72,6 +80,22 @@ public class Main {
 		
 		//TODO: save accounts to the disk...
 		
+	}
+
+	private static List<Account> loadRepository(String fileName) {
+		
+		List<Account> repository = new ArrayList<>();
+		
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+			repository = (List<Account>) ois.readObject();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return repository;
 	}
 
 
