@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main2 {
+public class BinaryRepositoryCreator {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		
@@ -17,7 +17,7 @@ public class Main2 {
 		
 		Account account2 = new Account("Dima", "111111", 46, "Toprivtsy", "dimkas71");
 		
-		List<Account> repository = new ArrayList<>();
+		BinaryRepository repository = new BinaryRepository();
 		
 		repository.add(account);
 		repository.add(account2);
@@ -55,7 +55,7 @@ public class Main2 {
 		
 		ObjectInputStream reader = new ObjectInputStream(new FileInputStream(file));
 		
-		List<Account> repos = (List<Account>) reader.readObject();
+		BinaryRepository repos = (BinaryRepository) reader.readObject();
 		
 		reader.close();
 		
