@@ -1,14 +1,20 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
 
-	private static final String REPOSITORY_PATH = "accounts.db";
+	//private static final Path REPOSITORY_PATH = Paths.get("accounts.db");
+	private static final Path REPOSITORY_PATH = Paths.get("account.db.txt");
 
 	public static void main(String[] args) {
 		
-		Repository repository = Repository.from(REPOSITORY_PATH);
+		//Repository repository = new BinarytRepository();
+		Repository repository = new TextRepository();
 		
-		System.out.println(repository.getRepository());
+		repository.load(REPOSITORY_PATH);
+		
+		System.out.println(repository);
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -36,7 +42,6 @@ public class Main {
 					
 			System.out.println("Create a password: ");
 			String password = sc.next();
-			System.out.println("Please check your data. If everything is correct, enter Yes. But if you want to change something, restart the registration.");
 			System.out.println("Your name: " + name + " Age: " + age + " Hometown: " + hometown + " Your nickname:" + newnickname + " Your password:" + password);
 			
 			Account account = new Account(name, password, age, hometown, newnickname);
@@ -49,53 +54,39 @@ public class Main {
 			String checking = sc.next();
 			if (checking.equalsIgnoreCase("Yes")){
 					System.out.println("You have registered successfully.");
-					System.out.println(". - - -  .  |.        |       ..       |");
-					System.out.println("|           |  .      |     .    .     |");
-					System.out.println("|- -     |  |    .    |    .------.    |");
-					System.out.println("|        |  |      .  |   .        .   |");
-					System.out.println("|        |  |        .|  .          .  |-------");
 			}
 			*/
 			
 		} else if (answer == 2){
 			
-			//TODO: write code below using repository...
-			
 			System.out.println("Enter your nickname: ");
 			String nickname = sc.next();
-			if (nickname.equals("Vova")){
-				System.out.println("Enter yor password: ");
-				String password = sc.next();
-				if (password.equals("vova")){
-					System.out.println("Your password is correct, welcome back.");
-				} else {
-					System.out.println("Your password doesn's fit.");
-				}
-			} else if (nickname.equals("Dima")){
-				System.out.println("Enter your passwod: ");
-				String password = sc.next();
-				if (password.equals("1111")){
-					System.out.println("Your password is correct, welcome back.");
-				} else {
-					System.out.println("Your password doesn't fit.");
-				}
+			
+			Account account = (Account) repository.findByNickname(nickname);
+			
+			if (account == null) {
+				throw new AccountException("Account with nickname " + nickname + " doesn't exist");
+			}
+			
+			//TODO: Scanner doesn't read empty password, try to fix it...
+			System.out.println("Enter yor password: ");
+			String password = sc.next();
+			
+			if (password.equals(account.getPassword())) {
+				System.out.println("Your password is correct, welcome back.");
 			} else {
-				System.out.println("This nickname is not registered yet");
+				System.out.println("Your password doesn's fit.");
 			}
 			
 		} else {
 			System.out.println("Sorry, but your answer doesn't fit.");
-			System.out.println(".----|  .----.  .----.  .----.  .      . ");
-			System.out.println("|       |    |  |    .  |    .    .   . ");
-			System.out.println(".----.  |    |  |.--    |.--        .");
-			System.out.println("     |  |    |  |  .    |  .       .");
-			System.out.println("|----.  .----.  |   .   |   .     .");
 		}
 		sc.close();
 
 		
-		Repository.saveRepository(REPOSITORY_PATH, repository);
 		
+		
+		repository.save(REPOSITORY_PATH);
 		
 	}
 	
