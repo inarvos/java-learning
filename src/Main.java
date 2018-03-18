@@ -14,6 +14,7 @@ public class Main {
 		
 		repository.load(REPOSITORY_PATH);
 		
+		
 		System.out.println(repository);
 		
 		Scanner sc = new Scanner(System.in);
