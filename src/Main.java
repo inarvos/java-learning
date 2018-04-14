@@ -1,88 +1,137 @@
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
-
 public class Main {
-
-	// private static final Path REPOSITORY_PATH = Paths.get("accounts.db");
-	private static final Path REPOSITORY_PATH = Paths.get("account.db.txt");
-
 	public static void main(String[] args) {
-
-		// Repository repository = new BinarytRepository();
-		Repository repository = new TextRepository();
-
-		repository.load(REPOSITORY_PATH);
-
-		System.out.println(repository);
-
 		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Do you want to start the registration or login to the already registered account?(1/2): ");
-		int answer = sc.nextInt();
-
-		if (answer == 1) {
-
-			System.out.println("Create a nickname: ");
-			String newnickname = sc.next();
-
-			// TODO: if exists than try again...
-			if (repository.exists(newnickname.trim())) {
-				throw new AccountException("Nick name already exists!");
+	System.out.println("Розклад занять 141 групи.");
+	System.out.println("Введіть номер підгрупи (1/2) : ");
+	int group = sc.nextInt();
+	if(group == 1 || group == 2) {
+		System.out.println("Введіть номер тижня (1/2) : ");
+		int week = sc.nextInt();
+		if(week == 1 || week == 2) {
+			System.out.println("Введіть день тижня: ");
+			String day = sc.next();
+			if(day.equalsIgnoreCase("Понеділок")){
+				System.out.println("1. Вища математика, 9-3, Дрінь Я.М.");
+				System.out.println("2. Алгоритмізація та програмування, 8-117, Фратавчан В.Г.");
+				if(group == 1) 
+					if(week == 1){
+						System.out.println("3. Алгоритмізація та програмування, 8-213, Фратавчан В.Г.");
+				//if(group == 1 && week == 1) {System.out.println("3. Алгоритмізація та програмування, 8-213, Фратавчан В.Г.");}
+				}
+				if(group == 2)
+					if(week == 2) {
+						System.out.println("3. Алгоритмізація та програмування, 8-213, Фратавчан В.Г.");
+				//if(group == 2 && week == 2) {System.out.println("3. Алгоритмізація та програмування, 8-213, Фратавчан В.Г.");}		
+					}
+				System.out.println("4. Фізичне виховання (за вибором)");
 			}
-
-			System.out.println("Enter your age: ");
-			int age = sc.nextInt();
-			System.out.println("Enter your hometown: ");
-			String hometown = sc.next();
-
-			System.out.println("Enter your full name: ");
-			String name = sc.next();
-
-			System.out.println("Create a password: ");
-			String password = sc.next();
-			System.out.println("Your name: " + name + ", " + " Age: " + age + ", " + " Hometown: " + hometown + ", " + " Your nickname:"
-					+ newnickname + ", "  + " Your password:" + password);
-			System.out.println("Please check your data. If everything is correct, write Yes, if not - restart the registration.");
-			String finishanswer = sc.next();
-			if (finishanswer.equals("Yes")) {
-				Account account = new Account(name, password, age, hometown, newnickname);
-
-				repository.add(account);
-				System.out.println("You have registered successfully.");
-			} else {
-				System.out.println("Try again.");
+			if(day.equalsIgnoreCase("Вівторок")) {
+				System.out.println("1. Охорона праці та безпека життєдіяльності (за вибором)");
+				if(week == 1) {
+					System.out.println("3. Дискретна математика, 8-212, Стецько Ю.П.");
+				}
+				if(week == 2) {
+					System.out.println("3. Комп'ютерна графіка, 8-212, Фратавчан В.Г.");
+				}
+				if(group == 1)
+					if(week == 1) {
+						System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");
+					}
+				//if(group == 1 && week == 1){System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");}		
+				if(group == 2)
+					if(week == 1) {
+						System.out.println("4. Дискретна математика, 8-212, Стецько Ю.П.");
+					}
+				//if(group == 2 && week == 1) {System.out.println("4. Дискретна математика, 8-212, Стецько Ю.П.");}
+				if(group == 1)
+					if(week == 2) {
+						System.out.println("4. Дискретна математика, 8-212, Філіпчук О.І.");
+					}
+				//if(group == 1 && week == 2) {System.out.println("4. Дискретна математика, 8-212, Філіпчук О.І.");}
+				if(group == 2)
+					if(week == 2) {
+						System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");
+					}
+				//if(group == 2 && week == 2) {System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");}
 			}
-			 
-		} else if (answer == 2) {
-
-			System.out.println("Enter your nickname: ");
-			String nickname = sc.next();
-
-			Account account = (Account) repository.findByNickname(nickname);
-
-			if (account == null) {
-				throw new AccountException("Account with nickname " + nickname + " doesn't exist");
+			if(day.equalsIgnoreCase("Середа")) {
+				System.out.println("1. Веб-технології та веб-дизайн, 8-221, Лазорик В.В.");
+				if(group == 1) {
+					System.out.println("2. Вища математика, 8-212, Кириченко О.Л.");
+				}
+				if(group == 2) {
+					System.out.println("2. Вища математика, 8-211, Філіпчук О.І.");
+				}
+				System.out.println("3. Вища математика, 9-3, Дрінь Я.М.");
+				if(group == 2)
+					if(week == 1) {
+						System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");
+					}
+				//if(group == 2 && week == 1) {System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");}
+				if(group == 1)
+					if(week == 2) {
+						System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");
+					}
+				//if(group == 1 && week == 2) {System.out.println("4. Комп'ютерна графіка, 8-213, Фратавчан В.Г.");}
 			}
-
-			System.out.println("Enter yor password: ");
-			String password = sc.next();
-
-			if (password.equals(account.getPassword())) {
-				System.out.println("Your password is correct, welcome back.");
-			} else if (password.equals("")){
-				throw new AccountException("You have entered an empty password.");
-			} else {
-				System.out.println("Your password doesn's fit.");
+			if(day.equalsIgnoreCase("Четвер")) {
+				System.out.println("1. Іноземна мова, 8-202, Черепня Ю.В.");
+				if(group == 1)
+					if(week == 1) {
+						System.out.println("2. Теорія алгоритмів, 8-213, Сопронюк Є.Ф.");
+					}
+				//if(group == 1 && week == 1) {System.out.println("2. Теорія алгоритмів, 8-213, Сопронюк Є.Ф.");}
+				if(group == 2)
+					if(week == 1) {
+						System.out.println("2. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");
+					}
+				//if(group == 2 && week == 1) {System.out.println("2. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");}
+				if(group == 1)
+					if(week == 2) {
+						System.out.println("2. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");
+					}
+				//if(group == 1 && week == 2) {System.out.println("2. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");}
+				if(group == 2)
+					if(week == 2) {
+						System.out.println("2. Теорія алгоритмів, 8-213, Сопронюк Є.Ф.");
+					}
+				//if(group == 1 && week == 1) {System.out.println("2. Теорія алгоритмів, 8-213, Сопронюк Є.Ф.");}
+				if(group == 1)
+					if(week == 1) {
+						System.out.println("3. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");
+					}
+				//if(group == 1 && week == 1) {System.out.println("3. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");}
+				if(group == 2)
+					if(week == 2) {
+						System.out.println("3. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");
+					}
+				//if(group == 2 && week == 2) {System.out.println("3. Веб-технології та веб-дизайн, 8-216, Кириченко О.Л.");}
+				System.out.println("4. Іноземна мова (СПЕЦГРУПА), 8-202, Венкель О.В.");
 			}
-
+			if(day.equalsIgnoreCase("П'ятниця") || day.equalsIgnoreCase("Пятниця")) {
+				System.out.println("1. Теорія алгоритмів, 8-106, Сопронюк Є.Ф.");
+				if(group == 1) {
+					System.out.println("2. Вища математика, 8-212, Кириченко О.Л.");
+				}
+				if(group == 2) {
+					System.out.println("2. Вища математика, 8-211, Філіпчук О.І.");
+				}
+			}
+				else if(day.equalsIgnoreCase("Субота") && day.equalsIgnoreCase("Неділя")) {
+					System.out.println("Вихідний день.");
+			}
+				else {
+					System.out.println("День введений неправильно.");
+				}
 		} else {
-			System.out.println("Sorry, but your answer doesn't fit.");
+			System.out.println("Даного номеру тижня не існує.");
 		}
-		sc.close();
-
-		repository.save(REPOSITORY_PATH);
-
+		
+	} else {
+		System.out.println("Даної підгрупи не існує.");
+	}
+	sc.close();
 	}
 
 }
