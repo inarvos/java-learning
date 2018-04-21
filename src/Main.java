@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +50,14 @@ public class Main {
 		
 		Schedule schedule = new Schedule(infos);
 		
+		Group g141_2 = new Group(141, 2);
+		
+		schedule.scheduleInfos().stream()
+			.filter(si -> si.getGroup().equals(g141_2))
+			.forEach(System.out::println);
+		
+		
+		
 		//2. Get some input info(group, subgroup and week)
 		
 		//3. Print the schedule for it...
@@ -69,6 +78,37 @@ class Group {
 		this.subgroupNumber = subgroupNumber;
 	}
 
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + number;
+		result = prime * result + subgroupNumber;
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Group other = (Group) obj;
+		if (number != other.number)
+			return false;
+		if (subgroupNumber != other.subgroupNumber)
+			return false;
+		return true;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "" + number + "/" + subgroupNumber;
@@ -82,6 +122,17 @@ class Schedule {
 		super();
 		this.schedule = schedule;
 	}
+
+	public List<ScheduleInfo> scheduleInfos() {
+		return Collections.unmodifiableList(this.schedule);
+	}
+	
+	@Override
+	public String toString() {
+		return "Schedule [schedule=" + schedule + "]";
+	}
+
+
 
 	public static class ScheduleInfo {
 		
@@ -97,6 +148,32 @@ class Schedule {
 			this.dateClass = dateClass;
 			this.subject = subject;
 		}
+
+		
+		
+		public Group getGroup() {
+			return group;
+		}
+
+
+
+		public Date getDate() {
+			return date;
+		}
+
+
+
+		public int getDateClass() {
+			return dateClass;
+		}
+
+
+
+		public String getSubject() {
+			return subject;
+		}
+
+
 
 		@Override
 		public String toString() {
