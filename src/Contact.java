@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -87,8 +86,7 @@ public class Contact {
 		Set<Contact> contacts = new HashSet<Contact>();
 
 		for (String aContact : allContacts) {
-			String[] fields = aContact.split(DELIMITER);
-			contacts.add(new Contact(fields[0].trim(), fields[1].trim(), fields[2].trim()));
+			contacts.add(Contact.of(aContact, DELIMITER));
 		}
 
 		System.out.println("Enter a contact information in a format : 0997775090; Vova; Hromyk");
