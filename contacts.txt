@@ -1,0 +1,6 @@
+0660120222;Vova;Vaova
+0501400868;Vasya;Pupkin
+0508151021;Dima;Dima
+0501552543;Vladik;Vladik
+040439403;Sanya;Sanya
+0958367597;Ivan;Ivanov

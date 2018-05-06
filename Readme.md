@@ -1,1 +1,3 @@
 Java learning...
+
+java 10 could be downloaded from : http://jdk.java.net/10/
