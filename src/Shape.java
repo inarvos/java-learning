@@ -3,7 +3,7 @@ import java.util.List;
 
 public abstract class Shape {
 	
-	public double area() {return 0.0;}
+	public abstract double area();
 	
 	public static void main(String... args) {
 		
