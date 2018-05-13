@@ -7,13 +7,38 @@ public abstract class Shape {
 	
 	public static void main(String... args) {
 		
+		class Pentagon extends Shape {
+			
+			private double side;
+
+			public Pentagon(double side) {
+				this.side = side;
+			}
+			
+			@Override
+			public double area() {
+				return side * side * Math.sqrt(25 + 10 * Math.sqrt(5.0)) / 4;
+			}
+			
+		}
+		
 		
 		Circle c = new Circle(1.0);
 		Rectangle r = new Rectangle(1.0, 1.0);
 		Square sq = new Square(1.0);
+		TriangleWrapper wrapper = new TriangleWrapper();
+		RectangularTriangle rectr = new RectangularTriangle(10);
 		
 		
-		List<Shape> shapes = Arrays.asList(c, r, sq);
+		Pentagon pentagon = new Pentagon(1.0);
+		System.out.println("Pentagon area = " + pentagon.area());
+		
+		
+		TriangleWrapper.EquilateralTriangle tr = wrapper.new EquilateralTriangle(1.0);
+		
+		
+		
+		List<Shape> shapes = Arrays.asList(c, r, sq, tr, pentagon, rectr);
 		
 		double area = 0.0;
 		
@@ -24,9 +49,50 @@ public abstract class Shape {
 		System.out.println(area);
 		
 	}
+	
+	
+	private static class RectangularTriangle extends Shape {
+
+		private final double catetus;
+		
+		public RectangularTriangle(double other) {
+			this.catetus = other;
+		}
+		
+		@Override
+		public double area() {
+			return 1/2 * catetus * catetus;
+		}
+		
+	}
+	
 
 }
 
+
+class TriangleWrapper {
+	
+		public class EquilateralTriangle extends Shape {
+		
+		private final double side;
+		
+		public EquilateralTriangle(double other) {
+			super();
+			this.side = other;
+		}
+
+		public double getSide() {
+			return side;
+		}
+
+		@Override
+		public double area() {
+			
+			return side * side / 2;
+		}
+		
+	}
+}
 
 
 
