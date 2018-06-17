@@ -1,0 +1,2 @@
+final int MAX_DICE = 6;java.util.Random RANDOMIZER = new java.util.Random();
+System.out.println(RANDOMIZER.nextInt(MAX_DICE) + 1);
